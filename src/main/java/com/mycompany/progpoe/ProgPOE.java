@@ -1,7 +1,8 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-package com.mycompany.progpoepart1;
+
+package com.mycompany.progpoe;
 
 import java.util.Scanner;
 
@@ -12,6 +13,9 @@ import java.util.Scanner;
 public class ProgPOE {
 
     public static void main(String[] args) {
+        
+
+
 
         Scanner input = new Scanner(System.in);
 
@@ -67,3 +71,6 @@ if (login.loginUser(loginUsername, loginPassword)) {
 
     }
 }
+
+    
+
