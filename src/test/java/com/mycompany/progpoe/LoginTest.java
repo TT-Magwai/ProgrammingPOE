@@ -78,5 +78,43 @@ public class LoginTest {
         String results = invalidObj.registerUser();
         assertEquals(expected, results);
     }
+    
+      @Test
+    public void TestSuccessfulLogin(){
+        String loginUsername = "kyl_1";
+        String loginPassword = "Ch&k3@ke99!";
+        
+        boolean results = obj.loginUser(loginUsername, loginPassword);
+        assertTrue(results);
+    }
+    
+    @Test
+    public void TestUnsuccessfulLogin(){
+        String loginUsername = "kyl_1";
+        String loginPassword = "wrongPassword";
+        
+        boolean results = obj.loginUser(loginUsername, loginPassword);
+        assertFalse(results);
+    }
+    
+    @Test
+    public void TestSuccessfulLoginStatus(){
+        String loginUsername = "kyl_1";
+        String loginPassword = "Ch&k3@ke99!";
+        
+        String expected = "Login successful.";
+        String results = obj.returnLoginStatus(loginUsername, loginPassword);
+        assertEquals(expected, results);
+    }
+    
+    @Test
+    public void TestUnsuccessfulLoginStatus(){
+        String loginUsername = "kyl_1";
+        String loginPassword = "wrongPassword";
+        
+        String expected = "Login failed.";
+        String results = obj.returnLoginStatus(loginUsername, loginPassword);
+        assertEquals(expected, results);
+    }
      
 }
