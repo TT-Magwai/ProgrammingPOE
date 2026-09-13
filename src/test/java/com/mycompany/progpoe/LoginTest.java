@@ -17,47 +17,65 @@ public class LoginTest {
     
     @Test
     public void TestValidUsername(){
-        String username = "kyl_1";
         boolean results = obj.checkUserName();
         assertTrue(results);
     }
     
-      @Test
+    @Test
     public void TestInvalidUsername(){
-        String username = "kyle!!!!!";
-        boolean results = obj.checkUserName();
+        Login invalidObj = new Login(
+                "+27821234567",
+                "kyle!!!!!",
+                "Ch&k3@ke99!",
+                "Kyle",
+                "Smith"
+        );
+        
+        boolean results = invalidObj.checkUserName();
         assertFalse(results);
     }
     
-      @Test
+    @Test
     public void TestValidPassword(){
-        String password = "Ch&k3@ke99!";
         boolean results = obj.CheckPasswordComplexity();
         assertTrue(results);
     }
     
-     @Test
+    @Test
     public void TestInvalidPassword(){
-        String password = "password";
-        boolean results = obj.CheckPasswordComplexity();
+        Login invalidObj = new Login(
+                "+27821234567",
+                "kyl_1",
+                "password",
+                "Kyle",
+                "Smith"
+        );
+        
+        boolean results = invalidObj.CheckPasswordComplexity();
         assertFalse(results);
     }
     
-     @Test
+    @Test
     public void TestValidCellPhoneNumber(){
-        String cellNum = "+27821234567";
         boolean results = obj.checkCellPhoneNumber();
         assertTrue(results);
     }
     
     @Test
     public void TestInvalidCellPhoneNumber(){
-        String cellNum = "0821234567";
-        boolean results = obj.checkCellPhoneNumber();
+        Login invalidObj = new Login(
+                "0821234567",
+                "kyl_1",
+                "Ch&k3@ke99!",
+                "Kyle",
+                "Smith"
+        );
+        
+        boolean results = invalidObj.checkCellPhoneNumber();
         assertFalse(results);
     }
     
-        @Test
+    @Test
     public void TestSuccessfulRegistration(){
         String expected = "User registered successfully.";
         String results = obj.registerUser();
@@ -79,7 +97,7 @@ public class LoginTest {
         assertEquals(expected, results);
     }
     
-      @Test
+    @Test
     public void TestSuccessfulLogin(){
         String loginUsername = "kyl_1";
         String loginPassword = "Ch&k3@ke99!";
@@ -116,5 +134,4 @@ public class LoginTest {
         String results = obj.returnLoginStatus(loginUsername, loginPassword);
         assertEquals(expected, results);
     }
-     
 }

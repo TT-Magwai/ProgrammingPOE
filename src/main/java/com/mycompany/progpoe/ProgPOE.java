@@ -18,6 +18,7 @@ public class ProgPOE {
 
 
         Scanner input = new Scanner(System.in);
+        System.out.println("\n---- Register ----");
 
         System.out.println("Please enter your first name: ");
         String FirstName = input.nextLine();
