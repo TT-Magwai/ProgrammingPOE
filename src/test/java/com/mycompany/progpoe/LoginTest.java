@@ -13,11 +13,21 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class LoginTest {
     
-    public LoginTest() {
-    }
-
+    Login obj = new Login("+27821234567", "kyl_1", "Ch&k3@ke99!", "Kyle", "Smith");
+    
     @Test
-    public void testSomeMethod() {
+    public void TestValidUsername(){
+        String username = "kyl_1";
+        boolean results = obj.checkUserName();
+        assertTrue(results);
     }
+    
+      @Test
+    public void TestInvalidUsername(){
+        String username = "kyle!!!!!";
+        boolean results = obj.checkUserName();
+        assertFalse(results);
+    }
+    
     
 }
