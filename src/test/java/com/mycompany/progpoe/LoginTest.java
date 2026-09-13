@@ -56,5 +56,27 @@ public class LoginTest {
         boolean results = obj.checkCellPhoneNumber();
         assertFalse(results);
     }
+    
+        @Test
+    public void TestSuccessfulRegistration(){
+        String expected = "User registered successfully.";
+        String results = obj.registerUser();
+        assertEquals(expected, results);
+    }
+    
+    @Test
+    public void TestUnsuccessfulRegistration(){
+        Login invalidObj = new Login(
+                "+27821234567",
+                "kyle!!!!!",
+                "password",
+                "Kyle",
+                "Smith"
+        );
+        
+        String expected = "Username is incorrectly formatted.";
+        String results = invalidObj.registerUser();
+        assertEquals(expected, results);
+    }
      
 }
