@@ -42,5 +42,19 @@ public class LoginTest {
         boolean results = obj.CheckPasswordComplexity();
         assertFalse(results);
     }
+    
+     @Test
+    public void TestValidCellPhoneNumber(){
+        String cellNum = "+27821234567";
+        boolean results = obj.checkCellPhoneNumber();
+        assertTrue(results);
+    }
+    
+    @Test
+    public void TestInvalidCellPhoneNumber(){
+        String cellNum = "0821234567";
+        boolean results = obj.checkCellPhoneNumber();
+        assertFalse(results);
+    }
      
 }
