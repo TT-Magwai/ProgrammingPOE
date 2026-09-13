@@ -29,5 +29,18 @@ public class LoginTest {
         assertFalse(results);
     }
     
+      @Test
+    public void TestValidPassword(){
+        String password = "Ch&k3@ke99!";
+        boolean results = obj.CheckPasswordComplexity();
+        assertTrue(results);
+    }
     
+     @Test
+    public void TestInvalidPassword(){
+        String password = "password";
+        boolean results = obj.CheckPasswordComplexity();
+        assertFalse(results);
+    }
+     
 }
