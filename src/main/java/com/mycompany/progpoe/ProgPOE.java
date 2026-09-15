@@ -25,13 +25,13 @@ public class ProgPOE {
         System.out.print("Please enter your last name: ");
         String LastName = input.nextLine();
 
-        System.out.print("Please enter your Cellphone number:");
+        System.out.print("Please enter your Cellphone number (use the correct country code):");
         String cellNum = input.nextLine();
 
-        System.out.print("Please enter your username:");
+        System.out.print("Please enter your username (make use of an underscore):");
         String username = input.nextLine();
 
-        System.out.print("Please enter your password:");
+        System.out.print("Please enter your password (make use of a capital letter, a number, and a special character):");
         String password = input.nextLine();
 
         Login login = new Login(cellNum, username, password, FirstName, LastName);

@@ -68,9 +68,32 @@ public String returnLoginStatus(String loginUsername, String loginPassword) {
     } else {
         return "Login failed.";
     }
+    
 
 }
+public String usernameStatus() {
+    if (checkUserName()) {
+        return "Username successfully captured";
+    } else {
+        return "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length";
+    }
+}
 
+public String passwordStatus() {
+    if (CheckPasswordComplexity()) {
+        return "Password is successfully captured.";
+    } else {
+        return "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character";
+    }
+}
+
+public String cellPhoneStatus() {
+    if (checkCellPhoneNumber()) {
+        return "Cell phone number is successfully added.";
+    } else {
+        return "Cell phone number incorrectly formatted or does not contain international code";
+    }
+}
     
 }
 

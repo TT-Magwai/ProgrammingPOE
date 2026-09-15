@@ -13,89 +13,83 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class LoginTest {
     
-    Login obj = new Login("+27821234567", "kyl_1", "Ch&k3@ke99!", "Kyle", "Smith");
+    Login obj = new Login("+27838968976", "kyl_1", "Ch&k3@ke99!", "Kyle", "Smith");
+    
+    
+   
+    // ASSERT EQUALS TESTS
+    
     
     @Test
-    public void TestValidUsername(){
-        boolean results = obj.checkUserName();
-        assertTrue(results);
+    public void TestValidUsernameMessage(){
+        String expected = "Username successfully captured";
+        String results = obj.usernameStatus();
+        assertEquals(expected, results);
     }
     
     @Test
-    public void TestInvalidUsername(){
+    public void TestInvalidUsernameMessage(){
         Login invalidObj = new Login(
-                "+27821234567",
+                "+27838968976",
                 "kyle!!!!!",
                 "Ch&k3@ke99!",
                 "Kyle",
                 "Smith"
         );
         
-        boolean results = invalidObj.checkUserName();
-        assertFalse(results);
+        String expected = "Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length";
+        String results = invalidObj.usernameStatus();
+        assertEquals(expected, results);
     }
     
     @Test
-    public void TestValidPassword(){
-        boolean results = obj.CheckPasswordComplexity();
-        assertTrue(results);
+    public void TestValidPasswordMessage(){
+        String expected = "Password is successfully captured.";
+        String results = obj.passwordStatus();
+        assertEquals(expected, results);
     }
     
     @Test
-    public void TestInvalidPassword(){
+    public void TestInvalidPasswordMessage(){
         Login invalidObj = new Login(
-                "+27821234567",
+                "+27838968976",
                 "kyl_1",
                 "password",
                 "Kyle",
                 "Smith"
         );
         
-        boolean results = invalidObj.CheckPasswordComplexity();
-        assertFalse(results);
+        String expected = "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character";
+        String results = invalidObj.passwordStatus();
+        assertEquals(expected, results);
     }
     
     @Test
-    public void TestValidCellPhoneNumber(){
-        boolean results = obj.checkCellPhoneNumber();
-        assertTrue(results);
+    public void TestValidCellPhoneMessage(){
+        String expected = "Cell phone number is successfully added.";
+        String results = obj.cellPhoneStatus();
+        assertEquals(expected, results);
     }
     
     @Test
-    public void TestInvalidCellPhoneNumber(){
+    public void TestInvalidCellPhoneMessage(){
         Login invalidObj = new Login(
-                "0821234567",
+                "08966553",
                 "kyl_1",
                 "Ch&k3@ke99!",
                 "Kyle",
                 "Smith"
         );
         
-        boolean results = invalidObj.checkCellPhoneNumber();
-        assertFalse(results);
-    }
-    
-    @Test
-    public void TestSuccessfulRegistration(){
-        String expected = "User registered successfully.";
-        String results = obj.registerUser();
+        String expected = "Cell phone number incorrectly formatted or does not contain international code";
+        String results = invalidObj.cellPhoneStatus();
         assertEquals(expected, results);
     }
     
-    @Test
-    public void TestUnsuccessfulRegistration(){
-        Login invalidObj = new Login(
-                "+27821234567",
-                "kyle!!!!!",
-                "password",
-                "Kyle",
-                "Smith"
-        );
-        
-        String expected = "Username is incorrectly formatted.";
-        String results = invalidObj.registerUser();
-        assertEquals(expected, results);
-    }
+    
+    
+    // ASSERT TRUE / FALSE TESTS
+    
     
     @Test
     public void TestSuccessfulLogin(){
@@ -116,22 +110,62 @@ public class LoginTest {
     }
     
     @Test
-    public void TestSuccessfulLoginStatus(){
-        String loginUsername = "kyl_1";
-        String loginPassword = "Ch&k3@ke99!";
-        
-        String expected = "Login successful.";
-        String results = obj.returnLoginStatus(loginUsername, loginPassword);
-        assertEquals(expected, results);
+    public void TestValidUsername(){
+        boolean results = obj.checkUserName();
+        assertTrue(results);
     }
     
     @Test
-    public void TestUnsuccessfulLoginStatus(){
-        String loginUsername = "kyl_1";
-        String loginPassword = "wrongPassword";
+    public void TestInvalidUsername(){
+        Login invalidObj = new Login(
+                "+27838968976",
+                "kyle!!!!!",
+                "Ch&k3@ke99!",
+                "Kyle",
+                "Smith"
+        );
         
-        String expected = "Login failed.";
-        String results = obj.returnLoginStatus(loginUsername, loginPassword);
-        assertEquals(expected, results);
+        boolean results = invalidObj.checkUserName();
+        assertFalse(results);
+    }
+    
+    @Test
+    public void TestValidPassword(){
+        boolean results = obj.CheckPasswordComplexity();
+        assertTrue(results);
+    }
+    
+    @Test
+    public void TestInvalidPassword(){
+        Login invalidObj = new Login(
+                "+27838968976",
+                "kyl_1",
+                "password",
+                "Kyle",
+                "Smith"
+        );
+        
+        boolean results = invalidObj.CheckPasswordComplexity();
+        assertFalse(results);
+    }
+    
+    @Test
+    public void TestValidCellPhoneNumber(){
+        boolean results = obj.checkCellPhoneNumber();
+        assertTrue(results);
+    }
+    
+    @Test
+    public void TestInvalidCellPhoneNumber(){
+        Login invalidObj = new Login(
+                "08966553",
+                "kyl_1",
+                "Ch&k3@ke99!",
+                "Kyle",
+                "Smith"
+        );
+        
+        boolean results = invalidObj.checkCellPhoneNumber();
+        assertFalse(results);
     }
 }
