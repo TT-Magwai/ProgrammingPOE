@@ -65,9 +65,26 @@ public class ProgPOE {
 
        System.out.println(login.returnLoginStatus(loginUsername, loginPassword));
 
+
 if (login.loginUser(loginUsername, loginPassword)) {
     System.out.println("Welcome " + FirstName + " " + LastName
             + ", it is great to see you again.");
+
+    System.out.println("\n---- Messaging ----");
+    System.out.print("Enter the recipient's cellphone number (e.g. +27718693002): ");
+    String recipient = input.nextLine();
+
+    System.out.print("Enter your message: ");
+    String message = input.nextLine();
+
+    MessageClass outer = new MessageClass();
+    MessageClass.Message msg = outer.new Message(recipient, message, 0);
+
+    System.out.println(msg.validateMessage());
+    System.out.println(msg.checkRecipientCell());
+
+} else {
+    System.out.println("Login failed. Messaging is unavailable.");
 }
 
     }

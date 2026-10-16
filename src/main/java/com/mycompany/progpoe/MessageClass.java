@@ -20,14 +20,17 @@ public class Message {
     private String message;
     private String messageHash;
 
-    public Message(String recipient, String message, int messageNumber) {
-        this.messageID = String.valueOf(
-                1000000000L + (long) (Math.random() * 9000000000L)
-        );
-        this.recipient = recipient;
-        this.message = message;
-        this.messageNumber = messageNumber;
-    }
+   public Message(String recipient, String message, int messageNumber) {
+    this.messageID = String.valueOf(
+            1000000000L + (long) (Math.random() * 9000000000L)
+    );
+
+    this.recipient = recipient;
+    this.message = message;
+    this.messageNumber = messageNumber;
+
+    totalMessages++;
+}
 
     public boolean checkMessageID() {
         return messageID.length() <= 10;
@@ -41,13 +44,18 @@ public class Message {
         }
     }
     
+
 public String validateMessage() {
     if (message.length() <= 250) {
         return "Message ready to send.";
     } else {
-        return "Message exceeds 250 characters.";
+        int excess = message.length() - 250;
+
+        return "Message exceeds 250 characters by "
+                + excess + "; please reduce the size.";
     }
 }
+
 
 public String createMessageHash() {
     String[] words = message.trim().split("\\s+");
