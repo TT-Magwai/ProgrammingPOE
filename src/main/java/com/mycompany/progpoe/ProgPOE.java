@@ -6,6 +6,9 @@ package com.mycompany.progpoe;
 
 import java.util.Scanner;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  *
  * @author Student
@@ -66,26 +69,119 @@ public class ProgPOE {
        System.out.println(login.returnLoginStatus(loginUsername, loginPassword));
 
 
+
 if (login.loginUser(loginUsername, loginPassword)) {
-    System.out.println("Welcome " + FirstName + " " + LastName
-            + ", it is great to see you again.");
+    System.out.println("Welcome to QuickChat.");
 
-    System.out.println("\n---- Messaging ----");
-    System.out.print("Enter the recipient's cellphone number (e.g. +27718693002): ");
-    String recipient = input.nextLine();
+    boolean running = true;
 
-    System.out.print("Enter your message: ");
-    String message = input.nextLine();
+    while (running) {
+        System.out.println("\n---- QuickChat Menu ----");
+        System.out.println("1. Send Messages");
+        System.out.println("2. Show recently sent messages");
+        System.out.println("3. Quit");
+        System.out.print("Enter your choice: ");
 
-    MessageClass outer = new MessageClass();
-    MessageClass.Message msg = outer.new Message(recipient, message, 0);
+        String choice = input.nextLine();
 
-    System.out.println(msg.validateMessage());
-    System.out.println(msg.checkRecipientCell());
+        switch (choice) {
+            
+case "1":
+    System.out.print("How many messages would you like to send? ");
+    int numberOfMessages;
+
+    try {
+        numberOfMessages = Integer.parseInt(input.nextLine());
+
+        if (numberOfMessages <= 0) {
+            System.out.println("Please enter a number greater than zero.");
+            break;
+        }
+
+        for (int i = 0; i < numberOfMessages; i++) {
+            System.out.println("\nMessage " + (i + 1)
+                    + " of " + numberOfMessages);
+
+            System.out.print("Enter recipient cellphone number: ");
+            String recipient = input.nextLine();
+
+            System.out.print("Enter your message: ");
+            String message = input.nextLine();
+
+            MessageClass outer = new MessageClass();
+            MessageClass.Message msg =
+                    outer.new Message(recipient, message, i);
+
+            if (message.length() >= 250) {
+                System.out.println(
+                        "Please enter a message of less than 250 characters.");
+                i--;
+                continue;
+            }
+
+            System.out.println(msg.checkRecipientCell());
+
+            if (!recipient.matches("^\\+27\\d{9}$")) {
+                i--;
+                continue;
+            }
+
+            System.out.println("Message ready to send.");
+            System.out.println("Message ID and hash: "
+                    + msg.createMessageHash());
+
+            System.out.println("1. Send Message");
+            System.out.println("2. Disregard Message");
+            System.out.println("3.  Store Message in a JSON file");
+            System.out.print("Choose an option: ");
+
+            String messageChoice = input.nextLine();
+
+            switch (messageChoice) {
+                case "1":
+                    System.out.println(msg.SentMessage("Send"));
+                    System.out.println(msg.printMessages());
+                    break;
+
+                case "2":
+                    System.out.println(msg.SentMessage("Disregard"));
+                    break;
+
+                case "3":
+                    System.out.println(msg.storeMessage());
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Message not processed.");
+                    i--;
+                    break;
+            }
+        }
+
+    } catch (NumberFormatException e) {
+        System.out.println("Please enter a valid whole number.");
+    }
+    break;
+
+
+            case "2":
+                System.out.println("Coming Soon.");
+                break;
+
+            case "3":
+                running = false;
+                System.out.println("Thank you for using QuickChat.");
+                break;
+
+            default:
+                System.out.println("Invalid option. Please choose 1, 2, or 3.");
+        }
+    }
 
 } else {
     System.out.println("Login failed. Messaging is unavailable.");
 }
+
 
     }
 }

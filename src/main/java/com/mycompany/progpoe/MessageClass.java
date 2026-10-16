@@ -4,6 +4,16 @@
  */
 package com.mycompany.progpoe;
 
+
+
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+
 /**
  *
  * @author Student
@@ -38,7 +48,7 @@ public class Message {
 
     public String checkRecipientCell() {
         if (recipient.matches("^\\+27\\d{9}$")) {
-            return "Cell phone number successfully captured.";
+            return "";
         } else {
             return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.";
         }
@@ -93,6 +103,70 @@ public String printMessages() {
 
 public int returnTotalMessagess() {
     return totalMessages;
+}
+
+
+
+public String storeMessage() {
+    try {
+        Path filePath = Paths.get("messages.json");
+
+        if (messageHash == null || messageHash.isEmpty()) {
+            createMessageHash();
+        }
+
+        String jsonMessage =
+                "  {\n"
+                + "    \"Message ID\": \"" + escapeJson(messageID) + "\",\n"
+                + "    \"Message Hash\": \"" + escapeJson(messageHash) + "\",\n"
+                + "    \"Recipient\": \"" + escapeJson(recipient) + "\",\n"
+                + "    \"Message\": \"" + escapeJson(message) + "\"\n"
+                + "  }";
+
+        String existingJson = "";
+
+        if (Files.exists(filePath)) {
+            existingJson = Files.readString(
+                    filePath, StandardCharsets.UTF_8).trim();
+        }
+
+        String updatedJson;
+
+        if (existingJson.isEmpty() || existingJson.equals("[]")) {
+            updatedJson = "[\n" + jsonMessage + "\n]\n";
+        } else if (existingJson.startsWith("[")
+                && existingJson.endsWith("]")) {
+
+            String contents = existingJson.substring(
+                    1, existingJson.length() - 1).trim();
+
+            if (contents.isEmpty()) {
+                updatedJson = "[\n" + jsonMessage + "\n]\n";
+            } else {
+                updatedJson = "[\n"
+                        + contents + ",\n"
+                        + jsonMessage + "\n]\n";
+            }
+        } else {
+            return "Error: messages.json does not contain a valid JSON array.";
+        }
+
+        Files.writeString(
+                filePath, updatedJson, StandardCharsets.UTF_8);
+
+        return "Message successfully stored";
+
+    } catch (IOException e) {
+        return "Error storing message: " + e.getMessage();
+    }
+}
+
+private String escapeJson(String value) {
+    return value.replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\n", "\\n")
+                .replace("\r", "\\r")
+                .replace("\t", "\\t");
 }
 
 
