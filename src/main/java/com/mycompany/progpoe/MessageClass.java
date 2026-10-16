@@ -40,6 +40,29 @@ public class Message {
             return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.";
         }
     }
+    
+public String validateMessage() {
+    if (message.length() <= 250) {
+        return "Message ready to send.";
+    } else {
+        return "Message exceeds 250 characters.";
+    }
+}
+
+public String createMessageHash() {
+    String[] words = message.trim().split("\\s+");
+
+    String firstWord = words[0].replaceAll("[^A-Za-z0-9]", "");
+    String lastWord = words[words.length - 1]
+            .replaceAll("[^A-Za-z0-9]", "");
+
+    messageHash = messageID.substring(0, 2) + ":"
+            + messageNumber + ":"
+            + (firstWord + lastWord).toUpperCase();
+
+    return messageHash;
+}
+
 }
 
 }
