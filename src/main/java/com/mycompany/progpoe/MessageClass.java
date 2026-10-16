@@ -63,6 +63,34 @@ public String createMessageHash() {
     return messageHash;
 }
 
+
+public String SentMessage(String choice) {
+    if (choice.equalsIgnoreCase("Send")) {
+        return "Message successfully sent";
+    } else if (choice.equalsIgnoreCase("Store")) {
+        return "Message successfully stored";
+    } else if (choice.equalsIgnoreCase("Disregard")) {
+        return "Press 0 to delete the message";
+    } else {
+        return "Invalid choice";
+    }
 }
+
+public String printMessages() {
+    return "Message ID: " + messageID
+            + "\nMessage Hash: " + messageHash
+            + "\nRecipient: " + recipient
+            + "\nMessage: " + message;
+}
+
+public int returnTotalMessagess() {
+    return totalMessages;
+}
+
+
+
+}
+private static int totalMessages = 0;
+
 
 }
