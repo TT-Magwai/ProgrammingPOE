@@ -46,13 +46,15 @@ public class Message {
         return messageID.length() <= 10;
     }
 
-    public String checkRecipientCell() {
-        if (recipient.matches("^\\+27\\d{9}$")) {
-            return "";
-        } else {
-            return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.";
-        }
+    
+public String checkRecipientCell() {
+    if (recipient.matches("^\\+27\\d{9}$")) {
+        return "Cell phone number successfully captured.";
+    } else {
+        return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.";
     }
+}
+
     
 
 public String validateMessage() {
@@ -95,7 +97,10 @@ public String SentMessage(String choice) {
 }
 
 public String printMessages() {
-    return "Message ID: " + messageID
+    return "========================"
+            + "\nMessage details"
+            + "\n==========================="
+            + "\nMessage ID: " + messageID
             + "\nMessage Hash: " + messageHash
             + "\nRecipient: " + recipient
             + "\nMessage: " + message;
