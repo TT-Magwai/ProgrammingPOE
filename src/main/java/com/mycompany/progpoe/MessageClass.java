@@ -226,5 +226,21 @@ public void addMessageDetails(Message msg) {
     messageHashes[messageHashes.length - 1] = msg.createMessageHash();
 }
 
+public String displayStoredSenderRecipient(String sender) {
+    if (storedMessages.length == 0) {
+        return "No stored messages available.";
+    }
+
+    StringBuilder output = new StringBuilder();
+
+    for (Message msg : storedMessages) {
+        output.append("\nSender: ").append(sender);
+        output.append("\nRecipient: ").append(msg.getRecipient());
+        output.append("\n-------------------------");
+    }
+
+    return output.toString();
+}
+
 
 }//MessageClass Ends here

@@ -10,5 +10,35 @@
     "Message Hash": "21:2:HIMOM",
     "Recipient": "+27794767576",
     "Message": "Hi mom"
+  },
+  {
+    "Message ID": "5424415124",
+    "Message Hash": "54:0:HIMAN",
+    "Recipient": "+27799655317",
+    "Message": "Hi, you are a man"
+  },
+  {
+    "Message ID": "3459896508",
+    "Message Hash": "34:0:HIDUDE",
+    "Recipient": "+27799655317",
+    "Message": "Hi, manly dude"
+  },
+  {
+    "Message ID": "9769148634",
+    "Message Hash": "97:0:HIMAMNISI",
+    "Recipient": "+27799655317",
+    "Message": "Hi MaMnisi"
+  },
+  {
+    "Message ID": "6292877135",
+    "Message Hash": "62:0:HELLOLOVE",
+    "Recipient": "+27799655317",
+    "Message": "Hello love"
+  },
+  {
+    "Message ID": "9882741700",
+    "Message Hash": "98:0:HELLOWENA",
+    "Recipient": "+27799655317",
+    "Message": "Hello wena"
   }
 ]

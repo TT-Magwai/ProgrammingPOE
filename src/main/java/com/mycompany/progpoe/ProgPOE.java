@@ -77,6 +77,7 @@ if (login.loginUser(loginUsername, loginPassword)) {
         System.out.println("1. Send Messages");
         System.out.println("2. Show recently sent messages");
         System.out.println("3. Quit");
+        System.out.println("4. Stored Messages");
         System.out.print("Enter your choice: ");
 
         String choice = input.nextLine();
@@ -134,25 +135,39 @@ case "1":
 
             String messageChoice = input.nextLine();
 
-            switch (messageChoice) {
-                case "1":
-                    System.out.println(msg.SentMessage("Send"));
-                    System.out.println(msg.printMessages());
-                    break;
+        switch (messageChoice) {
+    case "1":
+        System.out.println(msg.SentMessage("Send"));
 
-                case "2":
-                    System.out.println(msg.SentMessage("Disregard"));
-                    break;
+        outer.addSentMessage(msg);
+        outer.addMessageDetails(msg);
 
-                case "3":
-                    System.out.println(msg.storeMessage());
-                    break;
+        System.out.println(msg.printMessages());
+        break;
 
-                default:
-                    System.out.println("Invalid choice. Message not processed.");
-                    i--;
-                    break;
-            }
+    case "2":
+        System.out.println(msg.SentMessage("Disregard"));
+
+        outer.addDisregardedMessage(msg);
+        outer.addMessageDetails(msg);
+        break;
+
+    case "3":
+        String result = msg.storeMessage();
+        System.out.println(result);
+
+        if (result.equals("Message successfully stored")) {
+            outer.addStoredMessage(msg);
+            outer.addMessageDetails(msg);
+        }
+       break;
+        
+
+    default:
+        System.out.println("Invalid choice. Message not processed.");
+        i--;
+        break;
+}
         }
 
     } catch (NumberFormatException e) {
@@ -169,9 +184,19 @@ case "1":
                 running = false;
                 System.out.println("Thank you for using QuickChat.");
                 break;
+                
+            case "4":
+    MessageClass messageManager = new MessageClass();
+
+    String sender = login.FirstName + " " + login.LastName;
+
+    System.out.println(
+            messageManager.displayStoredSenderRecipient(sender)
+    );
+    break;
 
             default:
-                System.out.println("Invalid option. Please choose 1, 2, or 3.");
+                System.out.println("Invalid option. Please choose 1, 2, 3 or 4.");
         }
     }
 
