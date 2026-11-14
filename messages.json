@@ -1,26 +1,50 @@
 [
-  {
-    "Message ID": "8978651566",
-    "Message Hash": "89:0:AKETSEBETWERKA",
-    "Recipient": "+27799655317",
-    "Message": "Aketsebe ke tsubile Twerka!!"
+{
+    "Message ID": "8517261989",
+    "Message Hash": "85:1:WHEREYOU",
+    "Recipient": "+27838884567",
+    "Message": "Where are you?"
   },
   {
-    "Message ID": "9769148634",
-    "Message Hash": "97:0:HIMAMNISI",
-    "Recipient": "+27799655317",
-    "Message": "Hi MaMnisi"
+    "Message ID": "2375881467",
+    "Message Hash": "23:2:INOW",
+    "Recipient": "+27838884567",
+    "Message": "I am leaving now."
   },
   {
-    "Message ID": "6249721447",
-    "Message Hash": "62:0:HELLOWORLD",
-    "Recipient": "+27799655317",
-    "Message": "Hello world"
+    "Message ID": "5524652092",
+    "Message Hash": "55:0:DIDCAKE",
+    "Recipient": "+27834557896",
+    "Message": "Did you get the cake?"
   },
   {
-    "Message ID": "5626345327",
-    "Message Hash": "56:2:TIMERLAKA",
-    "Recipient": "+27825913891",
-    "Message": "Timer Laka"
+    "Message ID": "9078750292",
+    "Message Hash": "90:1:WHERETIME",
+    "Recipient": "+27838884567",
+    "Message": "Where are you? You are late! I have asked you to be on time."
+  },
+  {
+    "Message ID": "7172191499",
+    "Message Hash": "71:5:HELLOTHERE",
+    "Recipient": "+27838884567",
+    "Message": "Hello there."
+  },
+  {
+    "Message ID": "2907572012",
+    "Message Hash": "29:4:THISTEST",
+    "Recipient": "+27838884567",
+    "Message": "This is a report test."
+  },
+  {
+    "Message ID": "6095754086",
+    "Message Hash": "60:2:WHEREYOU",
+    "Recipient": "+27838884567",
+    "Message": "Where are you?"
+  },
+  {
+    "Message ID": "7347245441",
+    "Message Hash": "73:8:TESTINGSTORAGE",
+    "Recipient": "+27838884567",
+    "Message": "Testing JSON storage."
   }
 ]

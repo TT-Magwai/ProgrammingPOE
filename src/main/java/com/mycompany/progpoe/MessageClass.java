@@ -295,21 +295,23 @@ public String searchMessageByID(String searchID) {
 }
 
 public String searchMessagesByRecipient(String searchRecipient) {
-
     StringBuilder results = new StringBuilder();
     boolean found = false;
 
+    for (Message msg : sentMessages) {
+        if (msg.getRecipient().equals(searchRecipient)) {
+            results.append("\nRecipient: ").append(msg.getRecipient());
+            results.append("\nMessage: ").append(msg.getMessage());
+            results.append("\n----------------------");
+            found = true;
+        }
+    }
+
     for (Message msg : storedMessages) {
         if (msg.getRecipient().equals(searchRecipient)) {
-
-            results.append("\nRecipient: ")
-                    .append(msg.getRecipient());
-
-            results.append("\nMessage: ")
-                    .append(msg.getMessage());
-
+            results.append("\nRecipient: ").append(msg.getRecipient());
+            results.append("\nMessage: ").append(msg.getMessage());
             results.append("\n----------------------");
-
             found = true;
         }
     }
@@ -325,7 +327,7 @@ public String deleteMessageByHash(String searchHash) {
 
     for (int i = 0; i < storedMessages.length; i++) {
 
-        if (storedMessages[i].getMessageHash().equals(searchHash)) {
+        if (searchHash != null && searchHash.equals(storedMessages[i].getMessageHash()))  {
 
             Message[] updatedMessages =
                     new Message[storedMessages.length - 1];
@@ -341,6 +343,9 @@ public String deleteMessageByHash(String searchHash) {
 
                 for (int j = 0; j < updatedMessages.length; j++) {
                     Message msg = updatedMessages[j];
+                    if (msg.getMessageHash() == null || msg.getMessageHash().isEmpty()) {
+    msg.createMessageHash();
+}
 
                     json.append("  {\n")
                         .append("    \"Message ID\": \"")
@@ -521,6 +526,45 @@ private String unescapeJson(String value) {
             .replace("\\r", "\r")
             .replace("\\t", "\t")
             .replace("\\\\", "\\");
+}
+
+public String[] getSentMessageTexts() {
+
+    String[] messages = new String[sentMessages.length];
+
+    for (int i = 0; i < sentMessages.length; i++) {
+        messages[i] = sentMessages[i].getMessage();
+    }
+
+    return messages;
+}
+
+public String[] getDisregardedMessageTexts() {
+    String[] messages = new String[disregardedMessages.length];
+
+    for (int i = 0; i < disregardedMessages.length; i++) {
+        messages[i] = disregardedMessages[i].getMessage();
+    }
+
+    return messages;
+}
+
+public String[] getMessageIDs() {
+    return messageIDs;
+}
+
+public String[] getMessageHashes() {
+    return messageHashes;
+}
+
+public String[] getStoredMessageTexts() {
+    String[] messages = new String[storedMessages.length];
+
+    for (int i = 0; i < storedMessages.length; i++) {
+        messages[i] = storedMessages[i].getMessage();
+    }
+
+    return messages;
 }
 
 }//MessageClass Ends here
