@@ -70,6 +70,10 @@ public class ProgPOE {
 if (login.loginUser(loginUsername, loginPassword)) {
     System.out.println("Welcome to QuickChat.");
 
+    MessageClass messageManager = new MessageClass();
+
+    System.out.println(messageManager.loadStoredMessages());
+
     boolean running = true;
 
     while (running) {
@@ -186,7 +190,7 @@ System.out.println("Message Hash: " + msg.createMessageHash());
                 break;
                 
      case "4": {
-    MessageClass messageManager = new MessageClass();
+    
 
     String sender = login.FirstName + " " + login.LastName;
 
@@ -243,7 +247,7 @@ System.out.println("Message Hash: " + msg.createMessageHash());
     );
     break;
             case "6":
-    System.out.println("Coming Soon.");
+    System.out.println(messageManager.displayMessageReport());
     break;
 
             case "7":

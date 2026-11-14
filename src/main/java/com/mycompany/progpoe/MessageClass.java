@@ -12,6 +12,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -43,6 +46,18 @@ public class Message {
     this.recipient = recipient;
     this.message = message;
     this.messageNumber = messageNumber;
+
+    totalMessages++;
+}
+   
+   public Message(String messageID, String messageHash,
+        String recipient, String message) {
+
+    this.messageID = messageID;
+    this.messageHash = messageHash;
+    this.recipient = recipient;
+    this.message = message;
+    this.messageNumber = 0;
 
     totalMessages++;
 }
@@ -325,5 +340,125 @@ public String deleteMessageByHash(String searchHash) {
     return "Message hash not found.";
 }
 
+public String displayMessageReport() {
+
+    if (storedMessages.length == 0) {
+        return "No stored messages available.";
+    }
+
+    StringBuilder report = new StringBuilder();
+
+    report.append("\n========== MESSAGE REPORT ==========\n");
+
+    for (Message msg : storedMessages) {
+        report.append("\nMessage ID: ")
+                .append(msg.getMessageID());
+
+        report.append("\nMessage Hash: ")
+                .append(msg.getMessageHash());
+
+        report.append("\nRecipient: ")
+                .append(msg.getRecipient());
+
+        report.append("\nMessage: ")
+                .append(msg.getMessage());
+
+        report.append("\n------------------------------------");
+    }
+
+    return report.toString();
+}
+
+public String loadStoredMessages() {
+
+    try {
+        Path filePath = Paths.get("messages.json");
+
+        if (!Files.exists(filePath)) {
+            return "No messages.json file found.";
+        }
+
+        String json = Files.readString(
+                filePath, StandardCharsets.UTF_8);
+
+        ArrayList<Message> loadedMessages = new ArrayList<>();
+
+        Pattern objectPattern =
+                Pattern.compile("\\{(.*?)\\}", Pattern.DOTALL);
+
+        Pattern fieldPattern =
+                Pattern.compile("\"(Message ID|Message Hash|Recipient|Message)\"\\s*:\\s*\"((?:\\\\.|[^\"\\\\])*)\"");
+
+        Matcher objectMatcher = objectPattern.matcher(json);
+
+        while (objectMatcher.find()) {
+
+            String object = objectMatcher.group();
+
+            Matcher fieldMatcher = fieldPattern.matcher(object);
+
+            String id = "";
+            String hash = "";
+            String recipient = "";
+            String message = "";
+
+            while (fieldMatcher.find()) {
+
+                String key = fieldMatcher.group(1);
+                String value = unescapeJson(fieldMatcher.group(2));
+
+                switch (key) {
+                    case "Message ID":
+                        id = value;
+                        break;
+
+                    case "Message Hash":
+                        hash = value;
+                        break;
+
+                    case "Recipient":
+                        recipient = value;
+                        break;
+
+                    case "Message":
+                        message = value;
+                        break;
+                }
+            }
+
+            if (!id.isEmpty() && !hash.isEmpty()
+                    && !recipient.isEmpty()) {
+
+                loadedMessages.add(
+                        new Message(id, hash, recipient, message)
+                );
+            }
+        }
+
+        storedMessages = loadedMessages.toArray(new Message[0]);
+
+        messageIDs = new String[storedMessages.length];
+        messageHashes = new String[storedMessages.length];
+
+        for (int i = 0; i < storedMessages.length; i++) {
+            messageIDs[i] = storedMessages[i].getMessageID();
+            messageHashes[i] = storedMessages[i].getMessageHash();
+        }
+
+        return "Stored messages successfully loaded.";
+
+    } catch (IOException e) {
+        return "Error loading messages: " + e.getMessage();
+    }
+}
+
+private String unescapeJson(String value) {
+
+    return value.replace("\\\"", "\"")
+            .replace("\\n", "\n")
+            .replace("\\r", "\r")
+            .replace("\\t", "\t")
+            .replace("\\\\", "\\");
+}
 
 }//MessageClass Ends here
