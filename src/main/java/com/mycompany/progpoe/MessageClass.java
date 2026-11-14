@@ -210,7 +210,12 @@ public String getMessage() {
     return message;
 }
 
-} //Message Ends here
+} /*Message Ends here
+....
+....
+....
+.....
+Message Ends here*/
 
 
 
@@ -331,13 +336,70 @@ public String deleteMessageByHash(String searchHash) {
                 }
             }
 
-            storedMessages = updatedMessages;
+            try {
+                StringBuilder json = new StringBuilder("[\n");
 
-            return "Message successfully deleted.";
+                for (int j = 0; j < updatedMessages.length; j++) {
+                    Message msg = updatedMessages[j];
+
+                    json.append("  {\n")
+                        .append("    \"Message ID\": \"")
+                        .append(escapeJsonValue(msg.getMessageID()))
+                        .append("\",\n")
+                        .append("    \"Message Hash\": \"")
+                        .append(escapeJsonValue(msg.getMessageHash()))
+                        .append("\",\n")
+                        .append("    \"Recipient\": \"")
+                        .append(escapeJsonValue(msg.getRecipient()))
+                        .append("\",\n")
+                        .append("    \"Message\": \"")
+                        .append(escapeJsonValue(msg.getMessage()))
+                        .append("\"\n")
+                        .append("  }");
+
+                    if (j < updatedMessages.length - 1) {
+                        json.append(",");
+                    }
+
+                    json.append("\n");
+                }
+
+                json.append("]\n");
+
+                Files.writeString(
+                        Paths.get("messages.json"),
+                        json.toString(),
+                        StandardCharsets.UTF_8
+                );
+
+                storedMessages = updatedMessages;
+
+                messageIDs = new String[storedMessages.length];
+                messageHashes = new String[storedMessages.length];
+
+                for (int j = 0; j < storedMessages.length; j++) {
+                    messageIDs[j] = storedMessages[j].getMessageID();
+                    messageHashes[j] = storedMessages[j].getMessageHash();
+                }
+
+                return "Message successfully deleted.";
+
+            } catch (IOException e) {
+                return "Error deleting message: " + e.getMessage();
+            }
         }
     }
 
     return "Message hash not found.";
+}
+
+
+private String escapeJsonValue(String value) {
+    return value.replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\n", "\\n")
+                .replace("\r", "\\r")
+                .replace("\t", "\\t");
 }
 
 public String displayMessageReport() {
