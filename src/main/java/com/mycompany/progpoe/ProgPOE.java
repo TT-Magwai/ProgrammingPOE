@@ -16,10 +16,7 @@ import java.io.IOException;
 public class ProgPOE {
 
     public static void main(String[] args) {
-        
-
-
-
+       
         Scanner input = new Scanner(System.in);
         System.out.println("\n---- Register ----");
 

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.progpoe;
-
+import java.util.Arrays;
 
 
 
@@ -20,7 +20,12 @@ import java.nio.file.Paths;
  */
 public class MessageClass {
     
+private static Message[] sentMessages = new Message[0];
+private static Message[] disregardedMessages = new Message[0];
+private static Message[] storedMessages = new Message[0];
 
+private static String[] messageHashes = new String[0];
+private static String[] messageIDs = new String[0];
 
 public class Message {
 
@@ -174,10 +179,52 @@ private String escapeJson(String value) {
                 .replace("\t", "\\t");
 }
 
-
-
+public String getMessageID() {
+    return messageID;
 }
+
+public String getMessageHash() {
+    return messageHash;
+}
+
+public String getRecipient() {
+    return recipient;
+}
+
+public String getMessage() {
+    return message;
+}
+
+} //Message Ends here
+
+
+
+
 private static int totalMessages = 0;
 
-
+public void addSentMessage(Message msg) {
+    sentMessages = Arrays.copyOf(sentMessages, sentMessages.length + 1);
+    sentMessages[sentMessages.length - 1] = msg;
 }
+
+public void addDisregardedMessage(Message msg) {
+    disregardedMessages = Arrays.copyOf(
+            disregardedMessages, disregardedMessages.length + 1);
+    disregardedMessages[disregardedMessages.length - 1] = msg;
+}
+
+public void addStoredMessage(Message msg) {
+    storedMessages = Arrays.copyOf(storedMessages, storedMessages.length + 1);
+    storedMessages[storedMessages.length - 1] = msg;
+}
+
+public void addMessageDetails(Message msg) {
+    messageIDs = Arrays.copyOf(messageIDs, messageIDs.length + 1);
+    messageIDs[messageIDs.length - 1] = msg.getMessageID();
+
+    messageHashes = Arrays.copyOf(messageHashes, messageHashes.length + 1);
+    messageHashes[messageHashes.length - 1] = msg.createMessageHash();
+}
+
+
+}//MessageClass Ends here
