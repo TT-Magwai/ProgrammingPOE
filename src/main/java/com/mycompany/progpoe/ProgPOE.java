@@ -125,12 +125,12 @@ case "1":
             }
 
             System.out.println("Message ready to send.");
-            System.out.println("Message ID and hash: "
-                    + msg.createMessageHash());
+            System.out.println("Message ID: " + msg.getMessageID());
+System.out.println("Message Hash: " + msg.createMessageHash());
 
             System.out.println("1. Send Message");
             System.out.println("2. Disregard Message");
-            System.out.println("3.  Store Message in a JSON file");
+            System.out.println("3. Store Message in a JSON file");
             System.out.print("Choose an option: ");
 
             String messageChoice = input.nextLine();
@@ -185,15 +185,65 @@ case "1":
                 System.out.println("Thank you for using QuickChat.");
                 break;
                 
-            case "4":
+     case "4": {
     MessageClass messageManager = new MessageClass();
 
     String sender = login.FirstName + " " + login.LastName;
 
+    boolean storedMenu = true;
+
+    while (storedMenu) {
+        System.out.println("\n---- Stored Messages ----");
+        System.out.println("1. Display sender and recipient");
+        System.out.println("2. Display longest message");
+        System.out.println("3. Search message by ID");
+        System.out.println("4. Search messages by recipient");
+        System.out.println("5. Delete message using hash");
+        System.out.println("6. Display message report");
+        System.out.println("7. Return to main menu");
+
+        System.out.print("Enter your choice: ");
+        String storedChoice = input.nextLine();
+
+        switch (storedChoice) {
+            case "1":
+                System.out.println(
+                        messageManager.displayStoredSenderRecipient(sender)
+                );
+                break;
+
+           case "2":
     System.out.println(
-            messageManager.displayStoredSenderRecipient(sender)
+            messageManager.displayLongestStoredMessage()
     );
     break;
+
+           case "3":
+    System.out.print("Enter the Message ID to search: ");
+    String searchID = input.nextLine();
+
+    System.out.println(
+            messageManager.searchMessageByID(searchID)
+    );
+    break;
+            case "4":
+            case "5":
+            case "6":
+    System.out.println("Coming Soon.");
+    break;
+
+            case "7":
+                storedMenu = false;
+                break;
+
+            default:
+                System.out.println("Invalid choice. Please choose 1 to 7.");
+        }
+    }
+    break;
+}
+   
+    
 
             default:
                 System.out.println("Invalid option. Please choose 1, 2, 3 or 4.");

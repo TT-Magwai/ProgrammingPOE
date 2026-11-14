@@ -240,7 +240,40 @@ public String displayStoredSenderRecipient(String sender) {
     }
 
     return output.toString();
+   
 }
+
+public String displayLongestStoredMessage() {
+    if (storedMessages.length == 0) {
+        return "No stored messages available.";
+    }
+
+    Message longest = storedMessages[0];
+
+    for (Message msg : storedMessages) {
+        if (msg.getMessage().length()
+                > longest.getMessage().length()) {
+            longest = msg;
+        }
+    }
+
+    return "Longest stored message: "
+            + longest.getMessage();
+}
+
+public String searchMessageByID(String searchID) {
+
+    for (Message msg : storedMessages) {
+        if (msg.getMessageID().equals(searchID)) {
+            return "Message found!"
+                    + "\nRecipient: " + msg.getRecipient()
+                    + "\nMessage: " + msg.getMessage();
+        }
+    }
+
+    return "Message ID not found.";
+}
+
 
 
 }//MessageClass Ends here

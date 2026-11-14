@@ -40,5 +40,47 @@
     "Message Hash": "98:0:HELLOWENA",
     "Recipient": "+27799655317",
     "Message": "Hello wena"
+  },
+  {
+    "Message ID": "2242096008",
+    "Message Hash": "22:0:SURESURE",
+    "Recipient": "+27799655317",
+    "Message": "Sure"
+  },
+  {
+    "Message ID": "6249721447",
+    "Message Hash": "62:0:HELLOWORLD",
+    "Recipient": "+27799655317",
+    "Message": "Hello world"
+  },
+  {
+    "Message ID": "5850200055",
+    "Message Hash": "58:1:HEMOM",
+    "Recipient": "+27799655317",
+    "Message": "He Mom"
+  },
+  {
+    "Message ID": "3753252191",
+    "Message Hash": "37:0:HELLOHELLO",
+    "Recipient": "+27799655317",
+    "Message": "HEllo"
+  },
+  {
+    "Message ID": "6324321353",
+    "Message Hash": "63:1:WUSSUUUPPPPWUSSUUUPPPP",
+    "Recipient": "+27799655317",
+    "Message": "Wussuuupppp"
+  },
+  {
+    "Message ID": "5648916407",
+    "Message Hash": "56:0:HELLOHELLO",
+    "Recipient": "+27799655317",
+    "Message": "Hello"
+  },
+  {
+    "Message ID": "4766943847",
+    "Message Hash": "47:1:SURESURE",
+    "Recipient": "+27799655317",
+    "Message": "Sure"
   }
 ]
