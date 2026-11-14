@@ -302,7 +302,7 @@ public void testDeleteMessageByHash() {
     MessageClass outer = new MessageClass();
 
     MessageClass.Message msg = outer.new Message(
-            "+27838884567",
+            "+27825913891",
             "This message must be deleted.",
             3
     );
@@ -319,7 +319,7 @@ public void testDisplayMessageReport() {
     MessageClass outer = new MessageClass();
 
     MessageClass.Message msg = outer.new Message(
-            "+27838884567",
+            "+27825913891",
             "This is a report test.",
             4
     );
@@ -331,7 +331,7 @@ public void testDisplayMessageReport() {
 
     assertTrue(result.contains(msg.getMessageID()));
     assertTrue(result.contains(msg.getMessageHash()));
-    assertTrue(result.contains("+27838884567"));
+    assertTrue(result.contains("+27825913891"));
     assertTrue(result.contains("This is a report test."));
 }
 
