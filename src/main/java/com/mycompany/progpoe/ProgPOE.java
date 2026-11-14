@@ -227,7 +227,21 @@ System.out.println("Message Hash: " + msg.createMessageHash());
     );
     break;
             case "4":
+    System.out.print("Enter recipient cellphone number: ");
+    String searchRecipient = input.nextLine();
+
+    System.out.println(
+            messageManager.searchMessagesByRecipient(searchRecipient)
+    );
+    break;
             case "5":
+    System.out.print("Enter the Message Hash of the message to delete: ");
+    String searchHash = input.nextLine();
+
+    System.out.println(
+            messageManager.deleteMessageByHash(searchHash)
+    );
+    break;
             case "6":
     System.out.println("Coming Soon.");
     break;

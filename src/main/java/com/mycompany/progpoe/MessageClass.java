@@ -274,6 +274,56 @@ public String searchMessageByID(String searchID) {
     return "Message ID not found.";
 }
 
+public String searchMessagesByRecipient(String searchRecipient) {
+
+    StringBuilder results = new StringBuilder();
+    boolean found = false;
+
+    for (Message msg : storedMessages) {
+        if (msg.getRecipient().equals(searchRecipient)) {
+
+            results.append("\nRecipient: ")
+                    .append(msg.getRecipient());
+
+            results.append("\nMessage: ")
+                    .append(msg.getMessage());
+
+            results.append("\n----------------------");
+
+            found = true;
+        }
+    }
+
+    if (!found) {
+        return "No messages found for this recipient.";
+    }
+
+    return results.toString();
+}
+
+public String deleteMessageByHash(String searchHash) {
+
+    for (int i = 0; i < storedMessages.length; i++) {
+
+        if (storedMessages[i].getMessageHash().equals(searchHash)) {
+
+            Message[] updatedMessages =
+                    new Message[storedMessages.length - 1];
+
+            for (int j = 0, k = 0; j < storedMessages.length; j++) {
+                if (j != i) {
+                    updatedMessages[k++] = storedMessages[j];
+                }
+            }
+
+            storedMessages = updatedMessages;
+
+            return "Message successfully deleted.";
+        }
+    }
+
+    return "Message hash not found.";
+}
 
 
 }//MessageClass Ends here
